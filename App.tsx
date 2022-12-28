@@ -9,6 +9,7 @@ import OnboardingScreen from './src/screens/Onboarding';
 import SelectScreen from './src/screens/Select';
 import LocalScreen from './src/screens/Local';
 import TravelScreen from './src/screens/Travel';
+import ItemsScreen from './src/screens/Items';
 import { RecoilRoot } from 'recoil';
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -23,6 +24,7 @@ const App = () => {
               <RootStack.Screen name="Select" component={SelectScreen}/>
               <RootStack.Screen name="Local" component={LocalScreen}/>
               <RootStack.Screen name="Travel" component={TravelScreen}/>
+              <RootStack.Screen name="Items" component={ItemsScreen}/>
           </RootStack.Navigator>
       </NavigationContainer>
     </RecoilRoot>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, SafeAreaView, Text } from 'react-native';
+import { Image, SafeAreaView } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';

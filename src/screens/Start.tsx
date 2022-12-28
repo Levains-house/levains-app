@@ -4,10 +4,9 @@ import { View, Image, SafeAreaView, Text, TextInput, TouchableOpacity,
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
-import { StyledButton, ButtonText } from '../components/CommonComponents';
+import * as S from '../components/CommonComponents';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { loadAsync } from 'expo-font';
 
 type LoginScreenNavigationProp = StackNavigationProp<
@@ -54,7 +53,6 @@ const StartScreen = (props: Props) => {
 
       const handleButton = () => {
         setText({name: inputState.name, url: inputState.url});
-        AsyncStorage.setItem("username", inputState.name);
         navigation.navigate('Select');
       };
 
@@ -77,9 +75,9 @@ const StartScreen = (props: Props) => {
                 ></InputBox>
             </InputBoxContainer>
             </InputContainer>
-            <StyledButton onPress={handleButton}>
-                <ButtonText>따듯한 여정 시작하기</ButtonText>
-            </StyledButton>
+            <S.NextButton onPress={handleButton}>
+                <S.NextButtonText>따듯한 여정 시작하기</S.NextButtonText>
+            </S.NextButton>
         </CenterSafeAreaView>
     )
 }

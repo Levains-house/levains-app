@@ -1,8 +1,11 @@
 import React from 'react'
-import { Image, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { userState } from '../atoms/userState';
+import * as S from '../components/CommonComponents';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -15,32 +18,28 @@ type Props = {
 
 const TravelScreen = (props: Props) => {
     const { navigation } = props;
+    const [ userInfo, ]=useRecoilState(userState);
+
+    const handleButton = () => {
+        navigation.navigate('Items');
+      };
     return(
         <CenterSafeAreaView>
-            <Text>Travel</Text>
-            <StyledButton>
-                <ButtonText>로그인</ButtonText>
-            </StyledButton>
+            <S.HeaderContainer>
+                <S.HeaderFirstLine>{userInfo.name}님,</S.HeaderFirstLine>
+                <S.HeaderSecondLine>여정을 위한 <S.ColoredText>두번째</S.ColoredText> 단계예요</S.HeaderSecondLine>
+                <S.HeaderThirdLine>머무르는 숙소를 추가해주세요.</S.HeaderThirdLine>
+            </S.HeaderContainer>
+            
+            <S.NextButton>
+                <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
+            </S.NextButton>
         </CenterSafeAreaView>
     )
 }
-const CenterSafeAreaView = styled(SafeAreaView)`
+const CenterSafeAreaView = styled(View)`
     flex: 1;
     justify-content: center;
     align-items: center;
-    background: #FAF9F9;
-`;
-const StyledButton = styled(TouchableOpacity)`
-    width: 225px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-`;
-const ButtonText = styled(Text)`
-    // color: #ffffff;
-    font-size: 20px;
-    // font-family: 'OpenSansHebrew-Light';
 `;
 export default TravelScreen;

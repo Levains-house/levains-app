@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, SafeAreaView, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
@@ -19,6 +19,7 @@ type Props = {
 const SelectScreen = (props: Props) => {
     const { navigation } = props;
     const [userInfo, ] = useRecoilState(userState);
+    
     // <Text>{userInfo.name}</Text>
     // <Text>{userInfo.url}</Text>
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-export const StyledButton = styled(TouchableOpacity)`
+export const NextButton = styled(TouchableOpacity)`
     position:absolute;
     bottom: 4%;
     width: 85%;
@@ -14,7 +14,7 @@ export const StyledButton = styled(TouchableOpacity)`
     border-radius:20px;
 `;
 
-export const ButtonText = styled(Text)`
+export const NextButtonText = styled(Text)`
     color: #ffffff;
     font-size: 20%;
     // font-family: 'OpenSansHebrew-Light';
