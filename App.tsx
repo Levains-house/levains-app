@@ -9,7 +9,7 @@ import OnboardingScreen from './src/screens/Onboarding';
 import SelectScreen from './src/screens/Select';
 import LocalScreen from './src/screens/Local';
 import TravelScreen from './src/screens/Travel';
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import { RecoilRoot } from 'recoil';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 

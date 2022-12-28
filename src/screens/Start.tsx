@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Image, SafeAreaView, Text, TextInput, TouchableOpacity,
         NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -8,6 +8,7 @@ import { StyledButton, ButtonText } from '../components/CommonComponents';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { loadAsync } from 'expo-font';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -22,6 +23,18 @@ const StartScreen = (props: Props) => {
     const { navigation } = props;
     const [inputState, setInputState] = useState({ name: "", url: "" });
     const [, setText] = useRecoilState(userState);
+    const [isFontReady, setReady] = useState(false);
+
+    useEffect(() => {
+        async function fetchFont(){
+            await loadAsync({
+                "NotoSansKR-Bold" : require('../assets/fonts/NotoSansKR-Bold.otf'),
+                "NotoSansKR-Medium" : require('../assets/fonts/NotoSansKR-Medium.otf')
+            });
+            setReady(true);     
+        }
+        fetchFont();
+    }, []);
 
     const handleInputName = (e : NativeSyntheticEvent<TextInputChangeEventData>) => {
         const {text}  = e.nativeEvent
@@ -49,7 +62,7 @@ const StartScreen = (props: Props) => {
     return(
         <CenterSafeAreaView>
             <Logo source={require('../assets/images/mainLogo.png')}></Logo>
-            <TitleText>멘도롱주멍</TitleText>
+            {isFontReady && <TitleText>멘도롱주멍</TitleText>}
             <InputContainer>
             <InputBoxContainer>
                 <InputBox 
@@ -77,6 +90,7 @@ const TitleText = styled(Text)`
     margin-bottom:3%;
     color: #FFC000;
     font-size:22%;
+    font-family: NotoSansKR-Bold;
 `
 const CenterSafeAreaView = styled(SafeAreaView)`
     flex: 1;
