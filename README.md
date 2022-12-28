@@ -7,8 +7,8 @@
 ## 미리보기
 
 
+![demo](https://user-images.githubusercontent.com/86578246/209785379-c91a698c-5337-4a9f-827e-229c58bb9419.gif)
 
-Uploading Simulator Screen Recording - iPhone 14 - 2022-12-28 at 17.24.42.mp4…
 
 
 </div>
