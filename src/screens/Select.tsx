@@ -4,6 +4,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
 import { ColoredText, HeaderContainer, HeaderFirstLine, HeaderSecondLine, HeaderThirdLine } from '../components/CommonComponents';
+import { useRecoilState } from 'recoil';
+import { userState } from '../atoms/userState';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -16,6 +18,10 @@ type Props = {
 
 const SelectScreen = (props: Props) => {
     const { navigation } = props;
+    const [userInfo, ] = useRecoilState(userState);
+    // <Text>{userInfo.name}</Text>
+    // <Text>{userInfo.url}</Text>
+
     return(
         <CenterSafeAreaView>
             <HeaderContainer>

@@ -1,9 +1,13 @@
-import React from 'react'
-import { View, Image, SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react'
+import { View, Image, SafeAreaView, Text, TextInput, TouchableOpacity,
+        NativeSyntheticEvent, TextInputChangeEventData } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
 import { StyledButton, ButtonText } from '../components/CommonComponents';
+import { useRecoilState } from 'recoil';
+import { userState } from '../atoms/userState';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -16,19 +20,51 @@ type Props = {
 
 const StartScreen = (props: Props) => {
     const { navigation } = props;
+    const [inputState, setInputState] = useState({ name: "", url: "" });
+    const [, setText] = useRecoilState(userState);
+
+    const handleInputName = (e : NativeSyntheticEvent<TextInputChangeEventData>) => {
+        const {text}  = e.nativeEvent
+        setInputState({
+            ...inputState,
+            name: text,
+        });
+    };
+
+    const handleInputUrl = (e : NativeSyntheticEvent<TextInputChangeEventData>) => {
+        const {text}  = e.nativeEvent
+        setInputState({
+          ...inputState,
+          url: text,
+        });
+      };
+
+      const handleButton = () => {
+        setText({name: inputState.name, url: inputState.url});
+        AsyncStorage.setItem("username", inputState.name);
+        navigation.navigate('Select');
+      };
+
+
     return(
         <CenterSafeAreaView>
             <Logo source={require('../assets/images/mainLogo.png')}></Logo>
             <TitleText>멘도롱주멍</TitleText>
             <InputContainer>
             <InputBoxContainer>
-                <InputBox placeholder='닉네임을 입력해주세요'></InputBox>
+                <InputBox 
+                    onChange={handleInputName}
+                    placeholder='닉네임을 입력해주세요'
+                ></InputBox>
             </InputBoxContainer>
             <InputBoxContainer>
-                <InputBox placeholder='카카오톡 오픈채팅방 URL을 입력해주세요'></InputBox>
+                <InputBox 
+                    onChange={handleInputUrl}
+                    placeholder='카카오톡 오픈채팅방 URL을 입력해주세요'
+                ></InputBox>
             </InputBoxContainer>
             </InputContainer>
-            <StyledButton onPress={() => navigation.navigate('Select')}>
+            <StyledButton onPress={handleButton}>
                 <ButtonText>따듯한 여정 시작하기</ButtonText>
             </StyledButton>
         </CenterSafeAreaView>

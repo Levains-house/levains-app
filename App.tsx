@@ -9,11 +9,13 @@ import OnboardingScreen from './src/screens/Onboarding';
 import SelectScreen from './src/screens/Select';
 import LocalScreen from './src/screens/Local';
 import TravelScreen from './src/screens/Travel';
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
+    <RecoilRoot>
       <NavigationContainer>
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
               <RootStack.Screen name="Onboarding" component={OnboardingScreen} />
@@ -23,6 +25,7 @@ const App = () => {
               <RootStack.Screen name="Travel" component={TravelScreen}/>
           </RootStack.Navigator>
       </NavigationContainer>
+    </RecoilRoot>
   );
 };
 
