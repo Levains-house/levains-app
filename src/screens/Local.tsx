@@ -1,11 +1,13 @@
-import React from 'react'
-import { Image, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react'
+import { Image, View, Text, TouchableOpacity, Button } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
 import * as S from '../components/CommonComponents';
+import Postcode from '@actbase/react-daum-postcode';
+import Modal from 'react-native-modal'
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -19,6 +21,7 @@ type Props = {
 const LocalScreen = (props: Props) => {
     const { navigation } = props;
     const [ userInfo, ]=useRecoilState(userState);
+    const [isModal, setModal] = useState(false);
 
     const handleButton = () => {
         navigation.navigate('Items');
@@ -31,8 +34,20 @@ const LocalScreen = (props: Props) => {
                 <S.HeaderThirdLine>주소를 등록해주세요.</S.HeaderThirdLine>
             </S.HeaderContainer>
             <LocalLogo source={require('../assets/images/localLogo.png')}></LocalLogo>
-            <StyledButton>
-            </StyledButton>
+            <Modal isVisible={isModal}>
+                <Postcode
+                    style={{ width: 320, height: 320 }}
+                    jsOptions={{ animation: true, hideMapBtn: true }}
+                    onSelected={data => {
+                        alert(JSON.stringify(data));
+                        setModal(false);
+                    } } onError={function (error: unknown): void {
+                        throw new Error('Function not implemented.');
+                    } }                />
+            </Modal>
+            <TouchableOpacity onPress={() => setModal(true)}>
+                    <Text>주소찾기</Text>
+            </TouchableOpacity>  
             <S.NextButton>
                 <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
             </S.NextButton>
@@ -43,19 +58,6 @@ const CenterSafeAreaView = styled(View)`
     flex: 1;
     justify-content: center;
     align-items: center;
-`;
-const StyledButton = styled(TouchableOpacity)`
-    width: 225px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 30px;
-`;
-const ButtonText = styled(Text)`
-    // color: #ffffff;
-    font-size: 20px;
-    // font-family: 'OpenSansHebrew-Light';
 `;
 const LocalLogo = styled(Image)`
 
