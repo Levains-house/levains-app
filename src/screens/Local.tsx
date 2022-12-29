@@ -22,12 +22,13 @@ const LocalScreen = (props: Props) => {
     const { navigation } = props;
     const [ userInfo, ]=useRecoilState(userState);
     const [isModal, setModal] = useState(false);
+    const [address, setAddress] = useState("도로명주소 검색하기");
 
     const handleButton = () => {
         navigation.navigate('Items');
       };
     return(
-        <CenterSafeAreaView>
+        <S.Wrapper>
             <S.HeaderContainer>
                 <S.HeaderFirstLine>{userInfo.name}님,</S.HeaderFirstLine>
                 <S.HeaderSecondLine>여정을 위한 <S.ColoredText>두번째</S.ColoredText> 단계예요</S.HeaderSecondLine>
@@ -39,19 +40,23 @@ const LocalScreen = (props: Props) => {
                     style={{ width: 320, height: 320 }}
                     jsOptions={{ animation: true, hideMapBtn: true }}
                     onSelected={data => {
-                        alert(JSON.stringify(data));
+                        setAddress(data.address)
                         setModal(false);
                     } } onError={function (error: unknown): void {
                         throw new Error('Function not implemented.');
                     } }                />
             </Modal>
-            <TouchableOpacity onPress={() => setModal(true)}>
-                    <Text>주소찾기</Text>
-            </TouchableOpacity>  
+            <SearchBox onPress={() => setModal(true)}>
+                <SearchContiner>
+                    <Dot></Dot>
+                    <AddressText>{address}</AddressText>
+                    <LocalLogo source={require('../assets/images/searchIcon.png')}></LocalLogo>
+                </SearchContiner>
+            </SearchBox>  
             <S.NextButton>
                 <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
             </S.NextButton>
-        </CenterSafeAreaView>
+        </S.Wrapper>
     )
 }
 const CenterSafeAreaView = styled(View)`
@@ -61,5 +66,34 @@ const CenterSafeAreaView = styled(View)`
 `;
 const LocalLogo = styled(Image)`
 
+`
+const SearchBox = styled(TouchableOpacity)`
+    width: 85%;
+    height: 5.5%;
+    margin-top: 3%;
+    background-color: white;
+    justify-content: center;
+    border: 2px solid #CDCED6;
+    border-radius: 30px;
+    padding-left: 3%;
+`
+const Dot = styled(View)`
+    width: 3%;
+    height: 20%;
+    background: #E1E1E8;
+    border-radius: 20px;
+    margin-right: 4%;
+`
+const SearchContiner = styled(View)`
+    width:100%;
+    height: 100%;
+    flex-direction:row; 
+    align-items: center;
+`
+const AddressText = styled(Text)`
+    font-family: NotoSansKR-Regular;
+    font-size: 16rem;
+    color: #3E404C;
+    width: 83%;
 `
 export default LocalScreen;

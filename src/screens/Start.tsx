@@ -75,7 +75,7 @@ const TitleText = styled(Text)`
     margin-top:3%;
     margin-bottom:3%;
     color: #FFC000;
-    font-size:22%;
+    font-size:22rem;
     font-family: NotoSansKR-Bold;
 `
 
