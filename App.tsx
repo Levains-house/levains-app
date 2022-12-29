@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from './src/types/RootStackParamList';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import StartScreen from './src/screens/Start';
 import OnboardingScreen from './src/screens/Onboarding';
+import { createGlobalStyle } from 'styled-components';
 import SelectScreen from './src/screens/Select';
 import LocalScreen from './src/screens/Local';
 import TravelScreen from './src/screens/Travel';
 import ItemsScreen from './src/screens/Items';
 import { RecoilRoot } from 'recoil';
+import { loadAsync } from 'expo-font';
+
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
+  useEffect(() => {
+    async function fetchFont(){
+        await loadAsync({
+            "NotoSansKR-Bold" : require('./src/assets/fonts/NotoSansKR-Bold.otf'),
+            "NotoSansKR-Medium" : require('./src/assets/fonts/NotoSansKR-Medium.otf'),
+            "NotoSansKR-Regular" : require('./src/assets/fonts/NotoSansKR-Regular.otf'),
+            "Inter-Medium" : require('./src/assets/fonts/Inter-Medium.ttf')
+        });
+    }
+    fetchFont();
+}, []);
   return (
     <RecoilRoot>
       <NavigationContainer>

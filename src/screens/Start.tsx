@@ -22,18 +22,6 @@ const StartScreen = (props: Props) => {
     const { navigation } = props;
     const [inputState, setInputState] = useState({ name: "", url: "" });
     const [, setText] = useRecoilState(userState);
-    const [isFontReady, setReady] = useState(false);
-
-    useEffect(() => {
-        async function fetchFont(){
-            await loadAsync({
-                "NotoSansKR-Bold" : require('../assets/fonts/NotoSansKR-Bold.otf'),
-                "NotoSansKR-Medium" : require('../assets/fonts/NotoSansKR-Medium.otf')
-            });
-            setReady(true);     
-        }
-        fetchFont();
-    }, []);
 
     const handleInputName = (e : NativeSyntheticEvent<TextInputChangeEventData>) => {
         const {text}  = e.nativeEvent
@@ -58,9 +46,9 @@ const StartScreen = (props: Props) => {
 
 
     return(
-        <CenterSafeAreaView>
+        <S.Wrapper>
             <Logo source={require('../assets/images/mainLogo.png')}></Logo>
-            {isFontReady && <TitleText>멘도롱주멍</TitleText>}
+            <TitleText>멘도롱주멍</TitleText>
             <InputContainer>
             <InputBoxContainer>
                 <InputBox 
@@ -78,7 +66,7 @@ const StartScreen = (props: Props) => {
             <S.NextButton onPress={handleButton}>
                 <S.NextButtonText>따듯한 여정 시작하기</S.NextButtonText>
             </S.NextButton>
-        </CenterSafeAreaView>
+        </S.Wrapper>
     )
 }
 const Logo = styled(Image)`
@@ -90,12 +78,6 @@ const TitleText = styled(Text)`
     font-size:22%;
     font-family: NotoSansKR-Bold;
 `
-const CenterSafeAreaView = styled(SafeAreaView)`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    background: #FAF9F9;
-`;
 
 const InputContainer = styled(View)`
     align-items:center;
@@ -112,5 +94,6 @@ const InputBoxContainer = styled(View)`
 `
 const InputBox = styled(TextInput)`
     padding-left:5%;
+    font-family: NotoSansKR-Regular;
 `
 export default StartScreen;

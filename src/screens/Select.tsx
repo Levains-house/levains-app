@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ColoredText, HeaderContainer, HeaderFirstLine, HeaderSecondLine, HeaderThirdLine } from '../components/CommonComponents';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
+import * as S from '../components/CommonComponents'
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -24,7 +25,7 @@ const SelectScreen = (props: Props) => {
     // <Text>{userInfo.url}</Text>
 
     return(
-        <CenterSafeAreaView>
+        <S.Wrapper>
             <HeaderContainer>
                 <HeaderFirstLine>만나서 반가워요 :)</HeaderFirstLine>
                 <HeaderSecondLine>여정을 위한 <ColoredText>첫번째</ColoredText> 단계예요</HeaderSecondLine>
@@ -42,28 +43,20 @@ const SelectScreen = (props: Props) => {
                     <ButtonText>떠나요</ButtonText>
                 </StyledButton>
             </ButtonContainer>
-        </CenterSafeAreaView>
+        </S.Wrapper>
     )
 }
-const CenterSafeAreaView = styled(View)`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    background: #FAF9F9;
-`;
 const ButtonContainer = styled(View)`
     flex-direction: row;
-    margin-top:190%;
-    // width:100%;
+    margin-top:160%;
     height:100%;
 `
 const StyledButton = styled(TouchableOpacity)`
     width: 32%;
-    height: 25%;
+    height: 27.5%;
     display: flex;
     align-items: center;
     justify-content: center;
-    // margin-top: 30px;
     background-color:#FFC000;
     margin:2%;
     box-shadow: 0px 0px 20px rgba(69, 133, 237, 0.1);
@@ -72,11 +65,10 @@ const StyledButton = styled(TouchableOpacity)`
 const ButtonText = styled(Text)`
     color: #ffffff;
     font-size: 20rem;
-    // font-family: 'OpenSansHebrew-Light';
-    margin-bottom: 5%;
+    font-family: NotoSansKR-Medium;
 `;
 const Icon = styled(Image)`
     margin-top:20%;
-    margin-bottom:30%;
+    margin-bottom:20%;
 `
 export default SelectScreen;
