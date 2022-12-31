@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FlatList, Image, View, Text, TouchableOpacity, TextInput, NativeSyntheticEvent, TextInputChangeEventData, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react'
+import { FlatList, Image, View, Text, TouchableOpacity, TextInput, NativeSyntheticEvent, TextInputChangeEventData, ScrollView, SafeAreaView } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
 import styled from 'styled-components';
@@ -19,11 +19,16 @@ type Props = {
 };
 
 interface AddressData  {
-    address_name: string,
+    road_address_name: string,
     place_name: string,
     x: string,
     y: string,
     id: string
+}
+
+interface Cord {
+    lat: string,
+    long: string
 }
 
 const TravelScreen = (props: Props) => {
@@ -32,14 +37,10 @@ const TravelScreen = (props: Props) => {
     const [ places, setPlaces ] = useState<AddressData[]>([]);
     const [ isPlaceReady, setReady ] = useState(false);
     const [ keyword, setKeyword ] = useState("");
-
+    const [ cords, Setcords ] = useState<Cord[]>([]);
 
     const handleButton = () => {
         navigation.navigate('Items');
-    };
-
-    const handleSelect = () => {
-        searchAddress;
     };
 
     const handleKeyword = (e : NativeSyntheticEvent<TextInputChangeEventData>) => {
@@ -65,18 +66,15 @@ const TravelScreen = (props: Props) => {
         } catch (e) {
             console.log(e)
         }
-        return(
-            <Text>되나 이거</Text>
-        )
     }
 
-    const Item = (place_name:string) => {
-        <Text>{place_name}</Text>
+    const handelCord = (cord:Cord) => {
+        Setcords((oldArray) => [...oldArray, cord])
     }
 
-    const renderItem = (item:AddressData) => {
-        <Text>{item.place_name}</Text>
-    }
+    useEffect(() => {
+        console.log(cords)
+    }, [cords]);
 
     return(
         <S.Wrapper>
@@ -86,9 +84,11 @@ const TravelScreen = (props: Props) => {
                 <S.HeaderSecondLine>여정을 위한 <S.ColoredText>두번째</S.ColoredText> 단계예요</S.HeaderSecondLine>
                 <S.HeaderThirdLine>머무르는 숙소를 추가해주세요.</S.HeaderThirdLine>
             </S.HeaderContainer>
+
             <MapContainer></MapContainer>
+
             <SearchBox>
-                <S.SearchContiner>
+                <S.SearchContainer>
                     <S.Dot></S.Dot>
                     <InputBox 
                     onChange={handleKeyword}
@@ -97,26 +97,28 @@ const TravelScreen = (props: Props) => {
                     <TouchableOpacity onPress={searchAddress}>
                         <S.LogoImage source={require('../assets/images/searchIcon.png')}></S.LogoImage>
                     </TouchableOpacity>
-                </S.SearchContiner>
+                </S.SearchContainer>
             </SearchBox>
             <ResultContainer>
-
-            {/* <FlatList
+            {isPlaceReady && <FlatList
                 data={places}
-                renderItem={renderItem}
-                keyExtractor={item => item.id}
-            /> */}
-            
-            {isPlaceReady ? (places.map((item)=>{
-                return(
+                renderItem={ 
+                    ({item}) => 
+                    (
                     <ResultBox>
-                        <Text key={parseInt(item.id)}>{item.place_name}</Text>
+                        <MarkerImage source={require('../assets/images/marker.png')}></MarkerImage>
+                        <TextContainer>
+                            <PlaceText>{item.place_name}</PlaceText>
+                            <AddressText>{item.road_address_name}</AddressText>
+                        </TextContainer>
+                        <ChoiceButton onPress={()=>{handelCord({lat:item.x, long:item.y})}}>
+                            <ChoiceText>선택</ChoiceText>
+                        </ChoiceButton>
                     </ResultBox>
-                )
-            })):(<Text>아직 안 돼</Text>)
-            }
+                    )}
+                keyExtractor={ (item: AddressData) => item.id}
+            />}
             </ResultContainer>
-
             <S.NextButton>
                 <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
             </S.NextButton>
@@ -124,7 +126,12 @@ const TravelScreen = (props: Props) => {
         </S.Wrapper>
     )
 }
-
+const MapContainer = styled(View)`
+    height: 23%;
+    width: 100%;
+    background-color: grey;
+    margin-top: 37%;
+`
 const InputBox = styled(TextInput)`
     font-family: NotoSansKR-Regular;
     font-size: 16rem;
@@ -141,20 +148,50 @@ const SearchBox = styled(View)`
     border-radius: 30px;
     padding-left: 3%;
 `
-const ResultContainer = styled(ScrollView)`
-    background-color: white;
-    width: 85%;
-    height: 30%;
-`
-const MapContainer = styled(View)`
-    height: 23%;
-    width: 100%;
-    background-color: grey;
-    margin-top: 37%;
+const ResultContainer = styled(View)`
+    height: 40%;
+    margin-bottom: 20%;
 `
 const ResultBox = styled(View)`
-    height: 50%;
-    witdh: 85%;
-    background-color: grey;
+    margin-vertical: 1.5%;
+    background: #FFFFFF;
+    border: 1px solid #E1E1E8;
+    border-radius: 20px;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
+`
+const MarkerImage = styled(Image)`
+    margin-left:6%;
+`
+const TextContainer = styled(View)`
+    margin-left: 4%;
+    margin-right: 10%;
+`
+const PlaceText = styled(Text)`
+    font-family: NotoSansKR-Regular;
+    font-size: 16%;
+    color: #3E404C;
+`
+const AddressText = styled(Text)`
+    font-family: NotoSansKR-Regular;
+    font-size: 14%;
+    color: #CDCED6;
+`
+const ChoiceButton = styled(TouchableOpacity)`
+    position: absolute;
+    right: 7%;
+    border: 0.3px solid #CDCED6;
+    border-radius: 20px;    
+    align-items:center;
+    height: 55%;
+    width: 11%;
+    justify-content: center;
+`
+const ChoiceText = styled(Text)`
+    font-size: 12%;
+    font-family: NotoSansKR-Regular;
+    color: #A9ABB8;
 `
 export default TravelScreen;

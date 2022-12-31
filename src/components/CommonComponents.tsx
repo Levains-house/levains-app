@@ -71,7 +71,7 @@ export const Dot = styled(View)`
     border-radius: 20px;
     margin-right: 4%;
 `
-export const SearchContiner = styled(View)`
+export const SearchContainer = styled(View)`
     width:100%;
     height: 100%;
     flex-direction:row; 

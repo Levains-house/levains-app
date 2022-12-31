@@ -47,11 +47,11 @@ const LocalScreen = (props: Props) => {
                     } }                />
             </Modal>
             <S.SearchBox onPress={() => setModal(true)}>
-                <S.SearchContiner>
+                <S.SearchContainer>
                     <S.Dot></S.Dot>
                     <S.AddressText>{address}</S.AddressText>
                     <S.LogoImage source={require('../assets/images/searchIcon.png')}></S.LogoImage>
-                </S.SearchContiner>
+                </S.SearchContainer>
             </S.SearchBox>
             <S.NextButton>
                 <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>

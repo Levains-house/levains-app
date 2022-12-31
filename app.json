@@ -18,6 +18,7 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.levains.app",
       "supportsTablet": true
     },
     "android": {
