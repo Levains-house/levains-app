@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 
 export const NextButton = styled(TouchableOpacity)`
     position:absolute;
@@ -50,3 +50,36 @@ export const Wrapper = styled(SafeAreaView)`
     align-items: center;
     background: #FAF9F9;
 `;
+
+export const LogoImage = styled(Image)`
+
+`
+export const SearchBox = styled(TouchableOpacity)`
+    width: 85%;
+    height: 5.5%;
+    margin-top: 3%;
+    background-color: white;
+    justify-content: center;
+    border: 2px solid #CDCED6;
+    border-radius: 30px;
+    padding-left: 3%;
+`
+export const Dot = styled(View)`
+    width: 3%;
+    height: 20%;
+    background: #E1E1E8;
+    border-radius: 20px;
+    margin-right: 4%;
+`
+export const SearchContiner = styled(View)`
+    width:100%;
+    height: 100%;
+    flex-direction:row; 
+    align-items: center;
+`
+export const AddressText = styled(Text)`
+    font-family: NotoSansKR-Regular;
+    font-size: 16rem;
+    color: #3E404C;
+    width: 83%;
+`

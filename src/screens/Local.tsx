@@ -34,7 +34,7 @@ const LocalScreen = (props: Props) => {
                 <S.HeaderSecondLine>여정을 위한 <S.ColoredText>두번째</S.ColoredText> 단계예요</S.HeaderSecondLine>
                 <S.HeaderThirdLine>주소를 등록해주세요.</S.HeaderThirdLine>
             </S.HeaderContainer>
-            <LocalLogo source={require('../assets/images/localLogo.png')}></LocalLogo>
+            <S.LogoImage source={require('../assets/images/localLogo.png')}></S.LogoImage>
             <Modal isVisible={isModal}>
                 <Postcode
                     style={{ width: 320, height: 320 }}
@@ -46,54 +46,17 @@ const LocalScreen = (props: Props) => {
                         throw new Error('Function not implemented.');
                     } }                />
             </Modal>
-            <SearchBox onPress={() => setModal(true)}>
-                <SearchContiner>
-                    <Dot></Dot>
-                    <AddressText>{address}</AddressText>
-                    <LocalLogo source={require('../assets/images/searchIcon.png')}></LocalLogo>
-                </SearchContiner>
-            </SearchBox>  
+            <S.SearchBox onPress={() => setModal(true)}>
+                <S.SearchContiner>
+                    <S.Dot></S.Dot>
+                    <S.AddressText>{address}</S.AddressText>
+                    <S.LogoImage source={require('../assets/images/searchIcon.png')}></S.LogoImage>
+                </S.SearchContiner>
+            </S.SearchBox>
             <S.NextButton>
                 <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
             </S.NextButton>
         </S.Wrapper>
     )
 }
-const CenterSafeAreaView = styled(View)`
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-`;
-const LocalLogo = styled(Image)`
-
-`
-const SearchBox = styled(TouchableOpacity)`
-    width: 85%;
-    height: 5.5%;
-    margin-top: 3%;
-    background-color: white;
-    justify-content: center;
-    border: 2px solid #CDCED6;
-    border-radius: 30px;
-    padding-left: 3%;
-`
-const Dot = styled(View)`
-    width: 3%;
-    height: 20%;
-    background: #E1E1E8;
-    border-radius: 20px;
-    margin-right: 4%;
-`
-const SearchContiner = styled(View)`
-    width:100%;
-    height: 100%;
-    flex-direction:row; 
-    align-items: center;
-`
-const AddressText = styled(Text)`
-    font-family: NotoSansKR-Regular;
-    font-size: 16rem;
-    color: #3E404C;
-    width: 83%;
-`
 export default LocalScreen;
