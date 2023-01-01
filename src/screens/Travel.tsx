@@ -32,13 +32,6 @@ interface Cord {
     longitude: number
 }
 
-interface MarkerValue {
-    latitude: number,
-    longitude: number,
-    latitudeDelta: number,
-    longitudeDelta: number
-}
-
 const TravelScreen = (props: Props) => {
     const { navigation } = props;
     const [ userInfo, ]=useRecoilState(userState);
