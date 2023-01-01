@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { Image, View, Text, TouchableOpacity, Button } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
-import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
 import * as S from '../components/CommonComponents';
@@ -53,8 +51,8 @@ const LocalScreen = (props: Props) => {
                     <S.LogoImage source={require('../assets/images/searchIcon.png')}></S.LogoImage>
                 </S.SearchContainer>
             </S.SearchBox>
-            <S.NextButton>
-                <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
+            <S.NextButton onPress={handleButton}>
+                <S.NextButtonText>다음으로</S.NextButtonText>
             </S.NextButton>
         </S.Wrapper>
     )

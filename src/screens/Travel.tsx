@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList, Image, View, Text, TouchableOpacity, TextInput, NativeSyntheticEvent, TextInputChangeEventData, ScrollView, SafeAreaView } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/RootStackParamList';
@@ -80,10 +80,6 @@ const TravelScreen = (props: Props) => {
         Setcords((oldArray) => [...oldArray, cord])
     }
 
-    // useEffect(() => {
-    //     console.log(cords)
-    // }, [cords]);
-
     return(
         <S.Wrapper>
             <>
@@ -108,7 +104,7 @@ const TravelScreen = (props: Props) => {
                         <Marker
                             key = {index}
                             coordinate={{latitude:marker.latitude, longitude:marker.longitude}}
-                            image={require('../assets/images/mapMarker.png')}
+                            // image={require('../assets/images/mapMarker.png')}
                         />
                     ))}
                 </MapView>
@@ -147,8 +143,8 @@ const TravelScreen = (props: Props) => {
                 keyExtractor={ (item: AddressData) => item.id}
             />}
             </ResultContainer>
-            <S.NextButton>
-                <S.NextButtonText onPress={handleButton}>다음으로</S.NextButtonText>
+            <S.NextButton onPress={handleButton}>
+                <S.NextButtonText>다음으로</S.NextButtonText>
             </S.NextButton>
             </>
         </S.Wrapper>

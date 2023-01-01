@@ -4,11 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from './src/types/RootStackParamList';
 import StartScreen from './src/screens/Start';
 import OnboardingScreen from './src/screens/Onboarding';
-import { createGlobalStyle } from 'styled-components';
 import SelectScreen from './src/screens/Select';
 import LocalScreen from './src/screens/Local';
 import TravelScreen from './src/screens/Travel';
 import ItemsScreen from './src/screens/Items';
+import MainScreen from './src/screens/Main';
 import { RecoilRoot } from 'recoil';
 import { loadAsync } from 'expo-font';
 
@@ -37,6 +37,7 @@ const App = () => {
               <RootStack.Screen name="Local" component={LocalScreen}/>
               <RootStack.Screen name="Travel" component={TravelScreen}/>
               <RootStack.Screen name="Items" component={ItemsScreen}/>
+              <RootStack.Screen name="Main" component={MainScreen}/>
           </RootStack.Navigator>
       </NavigationContainer>
     </RecoilRoot>
