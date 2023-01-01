@@ -1818,6 +1818,11 @@
   resolved "https://registry.npmjs.org/@sinclair/typebox/-/typebox-0.24.51.tgz"
   integrity sha512-1P1OROm/rdubP5aFDSZQILU0vrLCJ4fvHt6EoqHEM+2D/G5MK3bIaymUKLit8Js9gbns5UyJnkP/TZROLw4tUA==
 
+"@types/geojson@^7946.0.8":
+  version "7946.0.10"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.10.tgz#6dfbf5ea17142f7f9a043809f1cd4c448cb68249"
+  integrity sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==
+
 "@types/hammerjs@^2.0.36":
   version "2.0.41"
   resolved "https://registry.npmjs.org/@types/hammerjs/-/hammerjs-2.0.41.tgz"
@@ -5676,6 +5681,13 @@ react-native-gradle-plugin@^0.70.3:
   version "0.70.3"
   resolved "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz"
   integrity sha512-oOanj84fJEXUg9FoEAQomA8ISG+DVIrTZ3qF7m69VQUJyOGYyDZmPqKcjvRku4KXlEH6hWO9i4ACLzNBh8gC0A==
+
+react-native-maps@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.3.2.tgz#8e30bfd9d934de02827253e5cde6c08a04f6356c"
+  integrity sha512-NB7HGRZOgxxXCWzrhIVucx/bsrEWANvk3DLci1ov4P9MQnEVQYQCCkTxsnaEvO191GeBOCRDyYn6jckqbfMtmg==
+  dependencies:
+    "@types/geojson" "^7946.0.8"
 
 react-native-modal@^13.0.1:
   version "13.0.1"

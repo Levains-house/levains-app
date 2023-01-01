@@ -8,6 +8,7 @@ import { userState } from '../atoms/userState';
 import axios from 'axios';
 import * as S from '../components/CommonComponents';
 import { KAKAO_REST_API_KEY } from "@env";
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -27,8 +28,15 @@ interface AddressData  {
 }
 
 interface Cord {
-    lat: string,
-    long: string
+    latitude: number,
+    longitude: number
+}
+
+interface MarkerValue {
+    latitude: number,
+    longitude: number,
+    latitudeDelta: number,
+    longitudeDelta: number
 }
 
 const TravelScreen = (props: Props) => {
@@ -72,9 +80,9 @@ const TravelScreen = (props: Props) => {
         Setcords((oldArray) => [...oldArray, cord])
     }
 
-    useEffect(() => {
-        console.log(cords)
-    }, [cords]);
+    // useEffect(() => {
+    //     console.log(cords)
+    // }, [cords]);
 
     return(
         <S.Wrapper>
@@ -85,7 +93,27 @@ const TravelScreen = (props: Props) => {
                 <S.HeaderThirdLine>머무르는 숙소를 추가해주세요.</S.HeaderThirdLine>
             </S.HeaderContainer>
 
-            <MapContainer></MapContainer>
+            <MapContainer>
+                <MapView
+                    style={{width:'100%', height:'100%'}}
+                    provider={PROVIDER_GOOGLE}
+                    initialRegion={{
+                        latitude: 33.3784564531332,
+                        longitude: 126.550600157083,
+                        latitudeDelta: 0.45,
+                        longitudeDelta: 0.1,
+                    }}
+                >
+                    {cords.map((marker, index)=>(
+                        <Marker
+                            key = {index}
+                            coordinate={{latitude:marker.latitude, longitude:marker.longitude}}
+                            image={require('../assets/images/mapMarker.png')}
+                        />
+                    ))}
+                </MapView>
+            </MapContainer>
+            
 
             <SearchBox>
                 <S.SearchContainer>
@@ -111,7 +139,7 @@ const TravelScreen = (props: Props) => {
                             <PlaceText>{item.place_name}</PlaceText>
                             <AddressText>{item.road_address_name}</AddressText>
                         </TextContainer>
-                        <ChoiceButton onPress={()=>{handelCord({lat:item.x, long:item.y})}}>
+                        <ChoiceButton onPress={()=>{handelCord({latitude:parseFloat(item.y), longitude:parseFloat(item.x)})}}>
                             <ChoiceText>선택</ChoiceText>
                         </ChoiceButton>
                     </ResultBox>

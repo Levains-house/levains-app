@@ -65,7 +65,7 @@ export const SearchBox = styled(TouchableOpacity)`
     padding-left: 3%;
 `
 export const Dot = styled(View)`
-    width: 3%;
+    width: 2.5%;
     height: 20%;
     background: #E1E1E8;
     border-radius: 20px;
