@@ -8,6 +8,8 @@ import * as S from '../components/CommonComponents';
 import { useRecoilState } from 'recoil';
 import { userState } from '../atoms/userState';
 import { loadAsync } from 'expo-font';
+import MyItemsPage from './MyItems';
+import YourItemsPage from './YourItems';
 
 type LoginScreenNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -56,10 +58,17 @@ const ItemsScreen = (props: Props) => {
                 )}                
             </ToggleContainer>
             <BodyContainer>
-                {toggle ? (<><Text>나의 주멍</Text></>) : (<><Text>너의 주멍</Text></>)}
+                {toggle ? 
+                (
+                <>
+                    <MyItemsPage/>
+                </>
+                ) : (
+                <>
+                    <YourItemsPage/>
+                </>
+                )}
             </BodyContainer>
-
-
 
             <S.NextButton onPress={handleButton}>
                 <S.NextButtonText>다음으로</S.NextButtonText>
