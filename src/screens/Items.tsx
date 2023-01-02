@@ -68,6 +68,7 @@ const ItemsScreen = (props: Props) => {
                     <YourItemsPage/>
                 </>
                 )}
+                
             </BodyContainer>
 
             <S.NextButton onPress={handleButton}>
